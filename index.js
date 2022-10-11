@@ -138,14 +138,22 @@ function mouseReleased() {
     square.mouseReleased();
 }
 
+let frSlider, gtSlider;
+
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowHeight - 100);
 
     square = new Square(100, 100, 100, 100);
+
+    frSlider = createSlider(0, 100, Square.FR * 100);
+    gtSlider = createSlider(0, 100, Square.GT * 100);
 }
 
 function draw() {
     background(255);
+
+    Square.FR = frSlider.value() / 100;
+    Square.GT = gtSlider.value() / 100;
 
     square.draw();
 }
