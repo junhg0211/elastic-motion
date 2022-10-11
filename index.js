@@ -138,7 +138,7 @@ function mouseReleased() {
     square.mouseReleased();
 }
 
-let frSlider, gtSlider;
+let frSlider, gtSlider, vcSlider;
 
 function setup() {
     createCanvas(windowWidth, windowHeight - 100);
@@ -147,6 +147,7 @@ function setup() {
 
     frSlider = createSlider(0, 100, Square.FR * 100);
     gtSlider = createSlider(0, 100, Square.GT * 100);
+    vcSlider = createSlider(0, 200, Square.VC * 100);
 }
 
 function draw() {
@@ -154,6 +155,7 @@ function draw() {
 
     Square.FR = frSlider.value() / 100;
     Square.GT = gtSlider.value() / 100;
+    Square.VC = vcSlider.value() / 100;
 
     square.draw();
 }
