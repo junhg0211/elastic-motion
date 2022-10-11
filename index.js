@@ -15,7 +15,7 @@ class Square {
     static MS = 100; // Minimal Size
     static GT = 0.2; // GelaTiness
     static FR = 0.1; // FRiction
-    static VC = 1; // Velocity Contribution
+    static VC = 0.2; // Velocity Contribution
 
     constructor(x, y, width, height) {
         this.x = x;
