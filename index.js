@@ -1,5 +1,20 @@
+function calculateDO(x, tx, dx, reversed) {
+    let [x1, x2] = [x, x + dx];
+    if (x1 > x2) [x1, x2] = [x2, x1];
+
+    sign = dx === 0 ? 0 : Math.abs(dx) / dx;
+
+    let d = Math.min(x2, tx) - Math.min(x1, tx);
+    let o = Math.max(x2, tx) - Math.max(x1, tx);
+
+    console.log(d, o, x1, x2, tx, dx);
+
+    return sign * (reversed ? d : o);
+}
+
 class Square {
     static DT = 30; // distance threshold
+    static MS = 100; // minimal size
 
     constructor(x, y, width, height) {
         this.x = x;
@@ -51,11 +66,21 @@ class Square {
             return;
         }
 
-        if (this.sc === 2 || this.sc === 3) this.tx += dx;
-        else this.tx2 += dx;
+        if (this.sc === 2 || this.sc === 3) {
+            dx = calculateDO(pmouseX, this.tx2 - Square.MS, dx, true);
+            this.tx += dx;
+        } else {
+            dx = calculateDO(pmouseX, this.tx + Square.MS, dx);
+            this.tx2 += dx;
+        }
 
-        if (this.sc === 1 || this.sc === 2) this.ty += dy;
-        else this.ty2 += dy;
+        if (this.sc === 1 || this.sc === 2) {
+            dy = calculateDO(pmouseY, this.ty2 - Square.MS, dy, true);
+            this.ty += dy;
+        } else {
+            dy = calculateDO(pmouseY, this.ty + Square.MS, dy);
+            this.ty2 += dy;
+        }
     }
 
     draw() {
