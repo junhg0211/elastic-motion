@@ -11,8 +11,9 @@ function calculateDO(x, tx, dx, reversed) {
 }
 
 class Square {
-    static DT = 30; // distance threshold
-    static MS = 100; // minimal size
+    static DT = 30; // corner detection Distance Threshold
+    static MS = 100; // Minimal Size
+    static VC = 1; // Velocity Contribution
 
     constructor(x, y, width, height) {
         this.x = x;
@@ -93,7 +94,11 @@ class Square {
 
         noStroke();
         fill(0);
-        rect(this.x, this.y, this.x2 - this.x, this.y2 - this.y, 20);
+        let x = this.x + Square.VC * (Math.abs(this.vy) - Math.abs(this.vx)),
+            x2 = this.x2 - Square.VC * (Math.abs(this.vy2) - Math.abs(this.vx2));
+        let y = this.y + Square.VC * (Math.abs(this.vx) - Math.abs(this.vy)),
+            y2 = this.y2 - Square.VC * (Math.abs(this.vx2) - Math.abs(this.vy2));
+        rect(x, y, x2-x, y2-y, 20);
 
         textAlign(CENTER, CENTER);
         textSize(32);
