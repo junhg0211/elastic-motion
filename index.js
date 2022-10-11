@@ -13,6 +13,8 @@ function calculateDO(x, tx, dx, reversed) {
 class Square {
     static DT = 30; // corner detection Distance Threshold
     static MS = 100; // Minimal Size
+    static GT = 0.2; // GelaTiness
+    static FR = 0.1; // FRiction
     static VC = 1; // Velocity Contribution
 
     constructor(x, y, width, height) {
@@ -40,13 +42,10 @@ class Square {
         let dx2 = this.tx2 - this.x2;
         let dy2 = this.ty2 - this.y2;
 
-        let gelatiness = 0.1;
-        let friction = 0.2;
-
-        this.vx += gelatiness * dx - friction * this.vx;
-        this.vy += gelatiness * dy - friction * this.vy;
-        this.vx2 += gelatiness * dx2 - friction * this.vx2;
-        this.vy2 += gelatiness * dy2 - friction * this.vy2;
+        this.vx += Square.FR * dx - Square.GT * this.vx;
+        this.vy += Square.FR * dy - Square.GT * this.vy;
+        this.vx2 += Square.FR * dx2 - Square.GT * this.vx2;
+        this.vy2 += Square.FR * dy2 - Square.GT * this.vy2;
     }
 
     resize() {
