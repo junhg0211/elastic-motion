@@ -7,8 +7,6 @@ function calculateDO(x, tx, dx, reversed) {
     let d = Math.min(x2, tx) - Math.min(x1, tx);
     let o = Math.max(x2, tx) - Math.max(x1, tx);
 
-    console.log(d, o, x1, x2, tx, dx);
-
     return sign * (reversed ? d : o);
 }
 
